@@ -18,7 +18,7 @@ spec:
     targetRevision: HEAD # always the last commit
     path: k8s/overlay/lab
   destination:
-    server: 'https://kbernetes.default.svc' # kubernetes api server
+    server: 'https://kubernetes.default.svc' # kubernetes api server
     # The namespace will only be set for namespace-scoped resources that have not set a value for .metadata.namespace
     namespace: default
   syncPolicy:
