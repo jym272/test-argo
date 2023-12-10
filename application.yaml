@@ -14,12 +14,15 @@ spec:
     server: 'https://kubernetes.default.svc' # kubernetes api server
     namespace: default # namespace where the application will be deployed
   syncPolicy:
+    # el main, es decir prod no debería ser automaitzao,
+    # sino manual, perimero refrest y luego sync en argocd
     automated:
       # can configure a webhook to trigger the sync
       # delete resources that are not defined in the application.yaml
       prune: true
       # undo or overwrite changes made outside of Argo CD
       selfHeal: true # if the application is deleted, recreate it
+      allowEmpty: false # Allows deleting all application resources during automatic syncing ( false by default ).
     syncOptions:
       - CreateNamespace=true # create namespace if it does not exist
 
