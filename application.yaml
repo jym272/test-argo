@@ -19,6 +19,8 @@ spec:
     path: apps
   destination:
     server: 'https://kubernetes.default.svc' # kubernetes api server
+    # or cluster name
+#    name: minikube
     # The namespace will only be set for namespace-scoped resources that have not set a value for .metadata.namespace
     namespace: default
   syncPolicy:
