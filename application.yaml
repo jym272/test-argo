@@ -7,14 +7,15 @@ spec:
   project: default #by deafult
   source:
     # git repository url
-    repoURL: https://gitlab.com/nanauchi/argocd-app-config.git
+    repoURL: https://github.com/jym272/test-argo.git
     targetRevision: HEAD # always the last commit
-    path: k8s/argocd-app
+    path: k8s
   destination:
     server: 'https://kubernetes.default.svc' # kubernetes api server
     namespace: default # namespace where the application will be deployed
   syncPolicy:
     automated:
+      # can configure a webhook to trigger the sync
       prune: false # delete resources that are not defined in the application.yaml
       # undo or overwrite changes made outside of Argo CD
       selfHeal: true # if the application is deleted, recreate it
