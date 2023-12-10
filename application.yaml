@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: myapp-argo-application-staging
+  namespace: argocd
+  finalizers:
+    # The default behaviour is foreground cascading deletion
+    # primero los recursos y luego este  manifesto
+    - resources-finalizer.argocd.argoproj.io
+    # Alternatively, you can use background cascading deletion
+    # - resources-finalizer.argocd.argoproj.io/background
+spec:
+  # The project the application belongs to.
+  project: default #by deafult
+  source:
+    # git repository url
+    repoURL: https://github.com/jym272/test-argo.git
+    targetRevision: HEAD # always the last commit
+    path: apps
+  destination:
+    server: 'https://kubernetes.default.svc' # kubernetes api server
+    # The namespace will only be set for namespace-scoped resources that have not set a value for .metadata.namespace
+    namespace: default
+  syncPolicy:
+    # el main, es decir prod no debería ser automaitzao,
+    # sino manual, perimero refrest y luego sync en argocd
+    automated:
+      # can configure a webhook to trigger the sync
+      # delete resources that are not defined in the application.yaml
+      prune: true
+      # undo or overwrite changes made outside of Argo CD
+      selfHeal: true # if the application is deleted, recreate it
+      allowEmpty: false # Allows deleting all application resources during automatic syncing ( false by default ).
+    syncOptions:
+      - CreateNamespace=true # create namespace if it does not exist
+
