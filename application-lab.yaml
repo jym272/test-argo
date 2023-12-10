@@ -17,8 +17,9 @@ spec:
     targetRevision: HEAD # always the last commit
     path: k8s/overlay/lab
   destination:
-    server: 'https://kubernetes.default.svc' # kubernetes api server
-    namespace: default # namespace where the application will be deployed
+    server: 'https://kbernetes.default.svc' # kubernetes api server
+    # The namespace will only be set for namespace-scoped resources that have not set a value for .metadata.namespace
+    namespace: default
   syncPolicy:
     # el main, es decir prod no debería ser automaitzao,
     # sino manual, perimero refrest y luego sync en argocd
