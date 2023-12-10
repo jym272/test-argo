@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: myapp-argo-application
+  namespace: argocd
+spec:
+  project: default #by deafult
+  source:
+    # git repository url
+    repoURL: https://gitlab.com/nanauchi/argocd-app-config.git
+    targetRevision: HEAD # always the last commit
+    path: k8s/argocd-app
+  destination:
+    server: 'https://kubernetes.default.svc' # kubernetes api server
+    namespace: default # namespace where the application will be deployed
+  syncPolicy:
+    automated:
+      prune: false # delete resources that are not defined in the application.yaml
+      # undo or overwrite changes made outside of Argo CD
+      selfHeal: true # if the application is deleted, recreate it
+    syncOptions:
+      - CreateNamespace=true # create namespace if it does not exist
+
