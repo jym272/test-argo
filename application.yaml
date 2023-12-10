@@ -16,7 +16,8 @@ spec:
   syncPolicy:
     automated:
       # can configure a webhook to trigger the sync
-      prune: false # delete resources that are not defined in the application.yaml
+      # delete resources that are not defined in the application.yaml
+      prune: true
       # undo or overwrite changes made outside of Argo CD
       selfHeal: true # if the application is deleted, recreate it
     syncOptions:
