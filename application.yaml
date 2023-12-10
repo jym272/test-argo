@@ -9,7 +9,7 @@ spec:
     # git repository url
     repoURL: https://github.com/jym272/test-argo.git
     targetRevision: HEAD # always the last commit
-    path: k8s
+    path: k8s/overlay/lab
   destination:
     server: 'https://kubernetes.default.svc' # kubernetes api server
     namespace: default # namespace where the application will be deployed
