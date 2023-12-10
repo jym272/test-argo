@@ -3,6 +3,12 @@ kind: Application
 metadata:
   name: myapp-argo-application
   namespace: argocd
+  finalizers:
+    # The default behaviour is foreground cascading deletion
+    # primero los recursos y luego este  manifesto
+    - resources-finalizer.argocd.argoproj.io
+    # Alternatively, you can use background cascading deletion
+    # - resources-finalizer.argocd.argoproj.io/background
 spec:
   project: default #by deafult
   source:
